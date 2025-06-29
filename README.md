@@ -28,17 +28,17 @@ which is essential for actual, practical use.
 
 ---
 
-## 4  Persisting Issues:
+## 4  Persisting Issues/TODO:
 
-Evaluation/use still requires encoding to sparse vectors, which has been causing memory overload errors. Still need to find a fix for this.
+1. Evaluation/use still requires encoding to sparse vectors, which has been causing memory overload errors. Still need to find a fix for this.
+2. Include function to check Loewner order/textual well-ordering. 
+3. Make training/eval executables with args
 
 ---
 
 ## 5  Repository Contains:
 
 This repo contains the class definition of Reduced_Density_NLP, a training example on BookCorpus, and evaluation against classical Bag of Words through training of identical logistic regression classifiers.
-
-&\text{Loewner order:} &A\preceq B &\iff B-A \text{ is p.s.d.}
 
 ---
 
