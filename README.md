@@ -30,9 +30,11 @@ which is essential for actual, practical use.
 
 ## 4  Persisting Issues/TODO:
 
-1. Evaluation/use still requires encoding to sparse vectors, which has been causing memory overload errors. Still need to find a fix for this.
-2. Include function to check Loewner order/textual well-ordering. 
-3. Make training/eval executables with args
+1. Expand on theory in readme
+2. Evaluation/use still requires encoding to sparse vectors, which has been causing memory overload errors. Still need to find a fix for this.
+3. Train+Evaluate on larger corpora
+4. Include function to check Loewner order/textual well-ordering. 
+5. Make training/eval executables with args
 
 ---
 
