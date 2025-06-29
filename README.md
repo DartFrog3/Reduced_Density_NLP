@@ -5,7 +5,7 @@
 
 ## 1  What is Reduced_Density_NLP?
 
-The RD model is akin to a classical bag-of-words model in that in replaces every **term‑frequency scalar** with a **positive‑semi‑definite density matrix** that preserves  word‑order information (in close proximity). Applying Tensor-Train compression, the model's storage requirements remain feasible and allows it to stream text over large corpora.
+The RD model is akin to a classical bag-of-words model in that in replaces every **term‑frequency scalar** with a **positive‑semi‑definite density matrix** that preserves  word‑order information (in close proximity, depending on prefix length parameter). Applying Tensor-Train compression, the model's storage requirements remain feasible and allows it to stream text over large corpora.
 
 ---
 
@@ -28,7 +28,7 @@ which is essential for actual, practical use.
 
 ---
 
-## 4  Persisting Issues/TODO:
+## 3  Persisting Issues/TODO:
 
 1. Expand on theory in readme
 2. Evaluation/use still requires encoding to sparse vectors, which has been causing memory overload errors. Still need to find a fix for this.
@@ -38,13 +38,13 @@ which is essential for actual, practical use.
 
 ---
 
-## 5  Repository Contains:
+## 4  Repository Contains:
 
 This repo contains the class definition of Reduced_Density_NLP, a training example on BookCorpus, and evaluation against classical Bag of Words through training of identical logistic regression classifiers.
 
 ---
 
-## 6  Testing Results:
+## 5  Testing Results:
 
 As an initial test, a 50,000 document subset of BookCorpus was used. The RD Model used a minimum_prefix_count=3 (with default inputs) and was incorporated into a logistic regression classifiers. TF-IDF was then used to train an identical logistic regression classifier and the performance between the two is as follows.
 
@@ -57,7 +57,7 @@ The RD Model performs worse, though this is not too surprising, given the small 
 
 ---
 
-## 7  License
+## 6  License
 
 This project is licensed under the MIT License – see `LICENSE` for details.
 
