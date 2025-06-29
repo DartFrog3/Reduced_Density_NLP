@@ -20,11 +20,11 @@ As in classical Bag of Words, counts of prefixes and suffixes correspond to prob
 &\text{Reduced density:} &\rho_v &= \varphi_v\varphi_v^{\top}\in\mathbb R^{N_{\text{pre}}\times N_{\text{pre}}}\\[4pt]
 \end{aligned}
 ```
-Applying TT compression allows the storage to scale as ```math
-\mathcal O((k-1)\,r^2\sigma)
-``` rather than ```math
-\mathcal O(\sigma^(k-1))
+Applying TT compression allows the storage to scale as 
+```math
+\mathcal O((k-1)\,r^2\sigma) \text{rather than} \mathcal O(\sigma^(k-1))
 ```
+which is essential for actual, practical use.
 
 ---
 
