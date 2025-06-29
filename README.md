@@ -16,13 +16,13 @@ As in classical Bag of Words, counts of prefixes and suffixes correspond to prob
 ```math
 \begin{aligned}
 &\text{Joint counts:} &C(u,v) &= \sum_{i\in\text{corpus}} 1[\text{prefix}_i = u,\;\text{token}_i = v]\\[4pt]
-&\text{State vector (with smoothing):} &\varphi_v[u] &= \sqrt{C(u,v)+\alpha}\;\; (u:\text{prefix})\\[4pt]
-&\text{Reduced density:} &\rho_v &= \varphi_v\varphi_v^{\top}\in\mathbb R^{N_{\text{pre}}\times N_{\text{pre}}}\\[4pt]
+&\text{State vector (with smoothing):} &\psi_v[u] &= \sqrt{C(u,v)+\alpha}\;\; (u:\text{prefix})\\[4pt]
+&\text{Reduced density:} &\rho_v &= \psi_v\psi_v^{\top}\in\mathbb R^{N_{\text{pre}}\times N_{\text{pre}}}\\[4pt]
 \end{aligned}
 ```
 Applying TT compression allows the storage to scale as 
 ```math
-\mathcal O((k-1)\,r^2\sigma) \text{rather than} \mathcal O(\sigma^(k-1))
+\mathcal O((k-1)\,r^2\sigma) \text{ rather than } \mathcal O(\sigma^{(k-1)})
 ```
 which is essential for actual, practical use.
 
@@ -34,7 +34,7 @@ Evaluation/use still requires encoding to sparse vectors, which has been causing
 
 ---
 
-## 4  Repository Contains:
+## 5  Repository Contains:
 
 This repo contains the class definition of Reduced_Density_NLP, a training example on BookCorpus, and evaluation against classical Bag of Words through training of identical logistic regression classifiers.
 
@@ -42,7 +42,7 @@ This repo contains the class definition of Reduced_Density_NLP, a training examp
 
 ---
 
-## 4  Testing Results:
+## 6  Testing Results:
 
 As an initial test, a 50,000 document subset of BookCorpus was used. The RD Model used a minimum_prefix_count=3 (with default inputs) and was incorporated into a logistic regression classifiers. TF-IDF was then used to train an identical logistic regression classifier and the performance between the two is as follows.
 
@@ -55,7 +55,7 @@ The RD Model performs worse, though this is not too surprising, given the small 
 
 ---
 
-## 6  License
+## 7  License
 
 This project is licensed under the MIT License – see `LICENSE` for details.
 
