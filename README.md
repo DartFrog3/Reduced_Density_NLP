@@ -1,5 +1,5 @@
 # Reduced_Density_NLP
-*Toy project implementing Tai-Danae Bradley's "Language Modeling with Reduced Densities" in pure Python*
+*Project implementing Tai-Danae Bradley's "Language Modeling with Reduced Densities" in pure Python*
 
 ---
 
@@ -11,7 +11,7 @@ In a classical bag-of-words model every token contributes a single scalar count,
 
 ## 2  Implementation Details
 
-Begin by fixing a prefix length $k-1$.  Let $C(p,w)$ be the number of times prefix $p$ is followed by token $w$ in the corpus, and let $\alpha>0$ be an add-$\alpha$ smoothing constant. As in classical bag-of-words models, counts of prefixes and suffixes correspond to probabilities which can then map to probability amplitudes by defining a ket
+Begin by fixing a prefix length $k-1$.  Let $C(p,w)$ be the number of times prefix $p$ is followed by token $w$ in the corpus, and let $\alpha>0$ be an $\text{add} - \alpha$ smoothing constant. As in classical bag-of-words models, counts of prefixes and suffixes correspond to probabilities which can then map to probability amplitudes by defining a ket
 
 $$
 \psi_w[p] \\ = \\ \sqrt{C(p,w)+\alpha},
