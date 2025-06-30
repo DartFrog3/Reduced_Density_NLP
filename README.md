@@ -14,26 +14,25 @@ In a classical bag-of-words model every token contributes a single scalar count,
 Begin by fixing a prefix length $k-1$.  Let $C(p,w)$ be the number of times prefix $p$ is followed by token $w$ in the corpus, and let $\alpha>0$ be an add-$\alpha$ smoothing constant. As in classical bag-of-words models, counts of prefixes and suffixes correspond to probabilities which can then map to probability amplitudes by defining a ket
 
 $$
-\psi_w[p] \;=\; \sqrt{\,C(p,w)+\alpha\,},
+\psi_w[p] \\ = \\ \sqrt{C(p,w)+\alpha},
 $$
 
 in keeping with the quantum analogy. So have $\psi_w \in \mathbb{R}^{N_{\text{pre}}}$ where $N_{\text{pre}}$ is the number of retained prefixes. The outer product
 
 $$
-\rho_w \;=\; \psi_w \psi_w^{\!\top}
+\rho_w \\ = \\ \psi_w \psi_w^\top
 $$
 
-is then a rank-1 reduced density matrix for suffix $w$. Document statistics are obtained by summing these operators over the tokenized text: $\rho_{\text{doc}} = \sum_{w\in\text{doc}} \rho_w$. Because $N_{\text{pre}}$ grows roughly like $\sigma^{k-1}$ for vocabulary size $\sigma$, each $\psi_w$ is reshaped into a $(k-1)$-way tensor and compressed with a Tensor-Train decomposition of maximum internal rank $r$. In doing so, this reduces storage scaling from $O(\sigma^{k-1})$ to $O\bigl((k-1)\,r^{2}\sigma\bigr)$ and preserves state vectors to a reasonable degree of approximation.
+is then a rank-1 reduced density matrix for suffix $w$. Document statistics are obtained by summing these operators over the tokenized text: $\rho_{\text{doc}} = \sum_{w\in\text{doc}} \rho_w$. Because $N_{\text{pre}}$ grows roughly like $\sigma^{k-1}$ for vocabulary size $\sigma$, each $\psi_w$ is reshaped into a $(k-1)$-way tensor and compressed with a Tensor-Train decomposition of maximum internal rank $r$. In doing so, this reduces storage scaling from $O(\sigma^{k-1})$ to $O\bigl((k-1)r^{2}\sigma\bigr)$ and preserves state vectors to a reasonable degree of approximation.
 
 ---
 
 ## 3  Persisting Issues/TODO:
 
-1. Expand on theory in readme
-2. Evaluation/use still requires encoding to sparse vectors, which has been causing memory overload errors. Still need to find a fix for this.
-3. Train+Evaluate on larger corpora
-4. Include function to check Loewner order/textual well-ordering. 
-5. Make training/eval executables with args
+1. Evaluation/use still requires encoding to sparse vectors, which has been causing memory overload errors. Still need to find a fix for this.
+2. Train+Evaluate on larger corpora
+3. Include function to check Loewner order/textual well-ordering. 
+4. Make training/eval executables with args
 
 ---
 
