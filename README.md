@@ -5,26 +5,25 @@
 
 ## 1  What is Reduced_Density_NLP?
 
-The RD model is akin to a classical bag-of-words model in that in replaces every **term‑frequency scalar** with a **positive‑semi‑definite density matrix** that preserves  word‑order information (in close proximity, depending on prefix length parameter). Applying Tensor-Train compression, the model's storage requirements remain feasible and allows it to stream text over large corpora.
+In a classical bag-of-words model every token contributes a single scalar count, losing almost all information about local word order or contextual ambiguity. However, this information can be retained with an analagoy to quantum physics, in density matrices. In the reduced density model (RD Model), for each vocabulary item $w$, form state vectors (to later produce a positive-semidefinite operator $\rho_w$, or a reduced density matrix) that live in the Hilbert space spanned by all $(k-1)$-gram prefixes within the corpus.  The spectrum of $\rho_w$ captures how many distinct, possible contexts exist for $w$.  Working with density operators therefore preserves the conditional probabilities of an $n$-gram model with the added benefit of more contexual understanding. Applying Tensor-Train compression, the model's storage requirements remain feasible and allows it to stream text over large corpora.
 
 ---
 
 ## 2  Implementation Details
 
-As in classical Bag of Words, counts of prefixes and suffixes correspond to probabilities. These can be mapped to probability amplitudes to assemble quantum state vectors. Taking the outer product will then yield a density matrix. 
+Begin by fixing a prefix length $k-1$.  Let $C(p,w)$ be the number of times prefix $p$ is followed by token $w$ in the corpus, and let $\alpha>0$ be an add-$\alpha$ smoothing constant. As in classical bag-of-words models, counts of prefixes and suffixes correspond to probabilities which can then map to probability amplitudes by defining a ket
 
-```math
-\begin{aligned}
-&\text{Joint counts:} &C(u,v) &= \sum_{i\in\text{corpus}} 1[\text{prefix}_i = u,\;\text{token}_i = v]\\[4pt]
-&\text{State vector (with smoothing):} &\psi_v[u] &= \sqrt{C(u,v)+\alpha}\;\; (u:\text{prefix})\\[4pt]
-&\text{Reduced density:} &\rho_v &= \psi_v\psi_v^{\top}\in\mathbb R^{N_{\text{pre}}\times N_{\text{pre}}}\\[4pt]
-\end{aligned}
-```
-Applying TT compression allows the storage to scale as 
-```math
-\mathcal O((k-1)\,r^2\sigma) \text{ rather than } \mathcal O(\sigma^{(k-1)})
-```
-which is essential for actual, practical use.
+$$
+\psi_w[p] \;=\; \sqrt{\,C(p,w)+\alpha\,},
+$$
+
+in keeping with the quantum analogy. So have $\psi_w \in \mathbb{R}^{N_{\text{pre}}}$ where $N_{\text{pre}}$ is the number of retained prefixes. The outer product
+
+$$
+\rho_w \;=\; \psi_w \psi_w^{\!\top}
+$$
+
+is then a rank-1 reduced density matrix for suffix $w$. Document statistics are obtained by summing these operators over the tokenized text: $\rho_{\text{doc}} = \sum_{w\in\text{doc}} \rho_w$. Because $N_{\text{pre}}$ grows roughly like $\sigma^{k-1}$ for vocabulary size $\sigma$, each $\psi_w$ is reshaped into a $(k-1)$-way tensor and compressed with a Tensor-Train decomposition of maximum internal rank $r$. In doing so, this reduces storage scaling from $O(\sigma^{k-1})$ to $O\bigl((k-1)\,r^{2}\sigma\bigr)$ and preserves state vectors to a reasonable degree of approximation.
 
 ---
 
