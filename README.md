@@ -1,5 +1,5 @@
 # Reduced_Density_NLP
-*Toy project implementing Tai-Danae Bradley's "Language Modeling with Reduced Densities" in pure Python*
+*Implementing Tai-Danae Bradley's "Language Modeling with Reduced Densities" in pure Python*
 
 ---
 
